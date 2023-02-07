@@ -40,7 +40,7 @@ public class AuthorizationServlet extends HttpServlet {
         } else {
             UserService userService = new UserService();
             if (userService.validUser(login, password)) {
-                HttpSession session = req.getSession();
+                HttpSession session = req.getSession(true);
                 session.setMaxInactiveInterval(1800); // 1800 секунд == 30 минут
                 session.setAttribute("login", login);
                 session.setAttribute("password", password);

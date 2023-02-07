@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.nio.file.Files,java.io.File" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+import="java.nio.file.Files,java.io.File" %> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,6 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Manager</title>
     <style>
+      :root {
+        --color-btn-primary-text: #fff;
+        --color-btn-primary-bg: #238636;
+        --color-btn-hover-primary-bg: #862323;
+        --color-btn-primary-border: rgba(240, 246, 252, 0.1);
+        --color-btn-primary-shadow: transparent;
+        --color-btn-primary-inset-shadow: transparent;
+      }
+
       .table__row {
         text-align: -webkit-left;
         text-align: -moz-left;
@@ -24,9 +34,63 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+
+      .logout-form {
+        position: fixed;
+        right: 8px;
+        top: 8px;
+      }
+
+      .btn {
+        position: relative;
+        display: inline-block;
+        padding: 5px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        border: 1px solid;
+        border-radius: 6px;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .btn-primary {
+        color: var(--color-btn-primary-text);
+        background-color: var(--color-btn-primary-bg);
+        border-color: var(--color-btn-primary-border);
+        box-shadow: var(--color-btn-primary-shadow),
+          var(--color-btn-primary-inset-shadow);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--color-btn-hover-primary-bg);
+        transition: 0.5s;
+      }
+
+      .btn-block {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
+    <form
+      class="logout-form"
+      action="./files/logout"
+      accept-charset="UTF-8"
+      method="post"
+    >
+      <button type="submit" class="btn btn-primary btn-block" role="menuitem">
+        Sign out
+      </button>
+    </form>
+
     <p>${date} ${timeZone}</p>
     <h1>${path}</h1>
     <hr />
