@@ -31,7 +31,7 @@ public class RequestLoggingFilter implements Filter {
                 isLoggedIn = userService.validUser(login.toString(), password.toString());
             }
         }
-        // boolean isLoggedIn = (session != null && session.getAttribute("userLogin") != null);
+
         String URI = httpRequest.getContextPath() + "/files";
         String loginURI = URI + "/login";
         String regURI = URI + "/signup";
@@ -44,16 +44,12 @@ public class RequestLoggingFilter implements Filter {
             chain.doFilter(request, response);
         } else if (isLoggedIn && isLoginRequest) {
             // попытка повторного перехода на страницу авторизации
-            //RequestDispatcher dispatcher = request.getRequestDispatcher("/files");
-            //dispatcher.forward(request, response);
             httpResponse.sendRedirect(URI);
         } else if (isLoggedIn || isLoginRequest) {
             // пользователь уже вошёл в профиль и прешёл на страницу входа
             chain.doFilter(request, response); // продолжаем цепочку фильтров, позволяя достичь адреса
         } else {
             // пользователь не вошёл в систему, требуется аутентификация
-            //RequestDispatcher dispatcher = request.getRequestDispatcher("/files/login");
-            //dispatcher.forward(request, response);
             httpResponse.sendRedirect(loginURI);
         }
     }

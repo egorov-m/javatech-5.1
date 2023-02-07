@@ -13,4 +13,14 @@
             <filter-name>RequestLoggingFilter</filter-name>
             <url-pattern>/*</url-pattern>
          </filter-mapping>
+
+         <filter>
+            <filter-name>RequestDirectoryFilter</filter-name>
+            <filter-class>com.example.demoweb.RequestDirectoryFilter</filter-class>
+         </filter>
+         <filter-mapping>
+            <filter-name>RequestDirectoryFilter</filter-name>
+            <url-pattern>/files</url-pattern>
+            <url-pattern>/files/download</url-pattern>
+         </filter-mapping>
 </web-app>

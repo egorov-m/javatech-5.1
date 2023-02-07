@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
             UserService userService = new UserService();
             try {
                 userService.addUser(login, email, password);
-                resp.sendRedirect("../login");
+                resp.sendRedirect("./login");
             } catch(IllegalArgumentException e) {
                 resp.sendRedirect(req.getContextPath() + req.getServletPath() + "?error=true");
             }

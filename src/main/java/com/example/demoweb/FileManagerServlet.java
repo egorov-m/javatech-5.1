@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/files")
 public class FileManagerServlet extends HttpServlet {
@@ -33,7 +34,18 @@ public class FileManagerServlet extends HttpServlet {
         // Текущая отображаемая директория
         String path = req.getParameter("path");
         if (path == null) {
-            path = System.getProperty("user.dir");
+            HttpSession session = req.getSession();
+            path = System.getProperty("user.home");
+            if (session != null) {
+                Object login = session.getAttribute("login");
+                if (login != null) {
+                    path = path + File.separator + login.toString();
+                } else {
+                    path = path + File.separator + "default";
+                }
+            } else {
+                path = path + File.separator + "default";
+            }
             resp.sendRedirect(String.format("%s%s?path=%s", req.getContextPath(), req.getServletPath(), URLEncoder.encode(path, StandardCharsets.UTF_8.toString())));
             return;
         }
