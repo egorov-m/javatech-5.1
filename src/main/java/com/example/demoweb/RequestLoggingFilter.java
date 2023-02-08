@@ -18,6 +18,10 @@ public class RequestLoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
@@ -46,7 +50,7 @@ public class RequestLoggingFilter implements Filter {
             // попытка повторного перехода на страницу авторизации
             httpResponse.sendRedirect(URI);
         } else if (isLoggedIn || isLoginRequest) {
-            // пользователь уже вошёл в профиль и прешёл на страницу входа
+            // пользователь уже вошёл в профиль или перешёл на страницу входа
             chain.doFilter(request, response); // продолжаем цепочку фильтров, позволяя достичь адреса
         } else {
             // пользователь не вошёл в систему, требуется аутентификация

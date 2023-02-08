@@ -2,7 +2,6 @@ package com.example.demoweb;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,20 +17,12 @@ import javax.servlet.http.HttpSession;
 public class RequestDirectoryFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String item = request.getParameter("path");
+        String path = request.getParameter("path");
 
-        if (item != null) {
+        if (path != null) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             HttpSession session = httpRequest.getSession(false);
-
-            String path;
-            if (httpRequest.getMethod().equals("POST")) {
-                byte[] bytes = item.getBytes(StandardCharsets.ISO_8859_1);
-                path = new String(bytes, StandardCharsets.UTF_8);
-            } else {
-                path = item;
-            }
 
             if (session != null) {
                 String home = System.getProperty("user.home");

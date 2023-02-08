@@ -14,9 +14,6 @@ import com.example.demoweb.service.UserService;
 public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-
         String param = req.getParameter("error");
         boolean isError = param != null && param.equals("true");
         if (isError) {
@@ -29,9 +26,6 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -41,7 +35,7 @@ public class RegistrationServlet extends HttpServlet {
             try {
                 userService.addUser(login, email, password);
                 resp.sendRedirect("./login");
-            } catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 resp.sendRedirect(req.getContextPath() + req.getServletPath() + "?error=true");
             }
         } else {

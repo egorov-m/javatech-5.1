@@ -23,11 +23,9 @@ public class FileDownloaderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String item = req.getParameter("path"); 
+        String path = req.getParameter("path"); 
 
-        if (item != null) {
-            byte[] bytes = item.getBytes(StandardCharsets.ISO_8859_1);
-            String path = new String(bytes, StandardCharsets.UTF_8);
+        if (path != null) {
             String fileName = Paths.get(path).getFileName().toString();
             resp.setContentType("application/x-msdownload");
             resp.setHeader("Content-Disposition", "attachment; filename="+ fileName);

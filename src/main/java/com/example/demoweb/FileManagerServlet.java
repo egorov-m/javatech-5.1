@@ -21,10 +21,6 @@ import javax.servlet.http.HttpSession;
 public class FileManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-
         // Время генерации страницы
         String date = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss").format(LocalDateTime.now());
         ZoneId timeZone = ZoneId.systemDefault();

@@ -15,9 +15,6 @@ import com.example.demoweb.service.UserService;
 public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-
         String param = req.getParameter("error");
         boolean isError = param != null && param.equals("true");
         if (isError) {
@@ -30,9 +27,6 @@ public class AuthorizationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (login == null || password == null) {

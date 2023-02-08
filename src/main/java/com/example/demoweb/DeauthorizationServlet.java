@@ -17,8 +17,6 @@ public class DeauthorizationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
         req.getSession(false).invalidate();
         resp.sendRedirect(req.getContextPath() + "/files");
     }
