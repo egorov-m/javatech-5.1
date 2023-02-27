@@ -26,7 +26,6 @@ public class FileDownloaderServlet extends HttpServlet {
 
         if (path != null) {
             String fileName = Paths.get(path).getFileName().toString();
-            resp.setContentType("application/x-msdownload");
             resp.setHeader("Content-Disposition", "attachment; filename="+ fileName);
             try (InputStream in = new FileInputStream(path); OutputStream out = resp.getOutputStream()) {
                 byte[] buffer = new byte[1048];
